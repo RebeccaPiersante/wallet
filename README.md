@@ -36,6 +36,7 @@ CREATE TABLE expense (
 ## STATO DEL PROGETTO
 
 In sviluppo
+
 Attualmente:
 
 - Setup progetto
