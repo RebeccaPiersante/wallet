@@ -1,11 +1,14 @@
 package com.rebecca.wallet.model.service.implementation;
 
+import com.rebecca.wallet.model.entity.Category;
 import com.rebecca.wallet.model.entity.Expense;
 import com.rebecca.wallet.model.repository.ExpenseRepository;
 import com.rebecca.wallet.model.service.abstraction.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,5 +54,24 @@ public class ExpenseServiceJPA implements ExpenseService {
         updateExpense.setId(id);
         repository.save(updateExpense);
         return true;
+    }
+
+
+    @Override
+    public BigDecimal sumAmountByCategoryAndDateBetween(Category category, LocalDate dateFrom, LocalDate dateTo) {
+        BigDecimal sum = repository.sumAmountByCategoryAndDateBetween(category,dateFrom,dateTo);
+        if(sum == null){
+            return BigDecimal.ZERO;
+        }
+        return sum;
+    }
+
+    @Override
+    public BigDecimal sumAmountByDateAndCategory(Category category, LocalDate date) {
+        BigDecimal sum = repository.sumAmountByDateAndCategory(category, date);
+        if(sum == null){
+            return BigDecimal.ZERO;
+        }
+        return sum;
     }
 }
