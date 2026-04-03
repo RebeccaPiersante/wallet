@@ -21,7 +21,7 @@ CREATE TABLE expense (
 	id_expense   SERIAL,
 	description  TEXT NOT NULL,
 	date_expense DATE NOT NULL,
-	amount		 NUMERIC(10, 2),
+	amount		 NUMERIC(10, 2) NOT NULL,
 	categories 	 VARCHAR(30) DEFAULT 'OTHER',
 
 	CONSTRAINT pk_expense PRIMARY KEY(id_expense)
