@@ -25,4 +25,10 @@ public interface ExpenseService {
 
     BigDecimal sumAmountByDateAndCategory(Category category, LocalDate date);
 
+    List<Expense> findByDateBetween(LocalDate dateFrom, LocalDate dateTo);
+
+    List<Expense> findByCategory(Category category);
+
+    List<Expense> findByDate(LocalDate date);
+
 }

@@ -74,4 +74,19 @@ public class ExpenseServiceJPA implements ExpenseService {
         }
         return sum;
     }
+
+    @Override
+    public List<Expense> findByDateBetween(LocalDate dateFrom, LocalDate dateTo) {
+        return repository.findByDateBetween(dateFrom, dateTo);
+    }
+
+    @Override
+    public List<Expense> findByCategory(Category category) {
+        return repository.findByCategory(category);
+    }
+
+    @Override
+    public List<Expense> findByDate(LocalDate date) {
+        return repository.findByDate(date);
+    }
 }
