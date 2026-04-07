@@ -1,49 +1,38 @@
-package com.rebecca.wallet.model.entity;
+package com.rebecca.wallet.dto;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import com.rebecca.wallet.model.entity.Category;
+import com.rebecca.wallet.model.entity.Expense;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "expense")
-public class Expense {
+public class ExpenseDTO {
 
-    @Id
-    @Column(name = "id_expense")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(name = "description", nullable = false)
-    @NotBlank
     private String description;
-
-    @Column(name = "date_expense", nullable = false)
-    @NotNull(message = "Inserire la data")
     private LocalDate date;
-
-    @Column(name = "amount")
-    @NotNull
-    //@Min(0)
-    @Positive
     private BigDecimal amount;
+    private Category category;
 
-    @Column(name = "categories")
-    @Enumerated(EnumType.STRING)
-    private Category category = Category.OTHER;
+    public ExpenseDTO() {
+    }
 
-    public Expense(){}
-
-    public Expense(Integer id, String description, LocalDate date, BigDecimal amount, Category category) {
+    public ExpenseDTO(Integer id, String description, LocalDate date, BigDecimal amount, Category category) {
         this.id = id;
         this.description = description;
         this.date = date;
         this.amount = amount;
         this.category = category;
+    }
+
+    //dto -> entity
+    public Expense toEntity() {
+        return new Expense(id, description, date, amount, category);
+    }
+
+    //entity -> dto
+    public static ExpenseDTO fromEntity(Expense expense) {
+        return new ExpenseDTO(expense.getId(), expense.getDescription(), expense.getDate(), expense.getAmount(), expense.getCategory());
     }
 
     public Integer getId() {
